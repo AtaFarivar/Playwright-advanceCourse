@@ -79,6 +79,4 @@ test.describe("Login Page Tests", () => {
     await common.expectVisible(login.errorMessage);
     await common.expectText(login.errorMessage, MESSAGES.emptyPass);
   });
-
-  //git added to project
 });
