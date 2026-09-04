@@ -54,7 +54,11 @@ export class CommonActions {
   }
 
   async fill(locator: Locator, text: string) {
-    await test.step("Fill with: " + text, async () => {
+    const inputType = await locator.getAttribute("type");
+    const isSecret = inputType === "password";
+    const displayText = isSecret ? "***" : text;
+
+    await test.step("Fill with: " + displayText, async () => {
       await locator.scrollIntoViewIfNeeded();
       await locator.fill(text);
     });
@@ -123,6 +127,9 @@ export class CommonActions {
   }
 
   async expectValue(locator: Locator, value: string) {
+    const inputType = await locator.getAttribute("type");
+    const isSecret = inputType === "password";
+    const displayText = isSecret ? "***" : value;
     await test.step("Validate field value: " + value, async () => {
       await expect(locator).toHaveValue(value);
     });
