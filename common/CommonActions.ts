@@ -129,8 +129,9 @@ export class CommonActions {
   async expectValue(locator: Locator, value: string) {
     const inputType = await locator.getAttribute("type");
     const isSecret = inputType === "password";
-    const displayText = isSecret ? "***" : value;
-    await test.step("Validate field value: " + value, async () => {
+    const displayValue = isSecret ? "***" : value;
+
+    await test.step("Validate field value: " + displayValue, async () => {
       await expect(locator).toHaveValue(value);
     });
   }
